@@ -1,0 +1,80 @@
+{
+    "type": "APL",
+    "version": "1.6",
+    "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
+    "settings": {},
+    "theme": "dark",
+    "import": [],
+    "resources": [],
+    "styles": {},
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {
+        "myPage": {
+            "parameters": [
+                "internalIndex",
+                "internalCaption",
+                "internalImageUrl"
+            ],
+            "item": {
+                "type": "Container",
+                "id": "myPageContainer",
+                "width": "100vw",
+                "height": "100vh",
+                "items": [
+                    {
+                        "text": "${internalCaption}",
+                        "textAlign": "center",
+                        "type": "Text",
+                        "speech": "${payload.data.properties.values[internalIndex].transformerOutput}",
+                        "id": "pageText_${internalIndex}",
+                        "width": "100vw",
+                        "height": "10vh"
+                    },
+                    {
+                        "type": "Image",
+                        "width": "100vw",
+                        "height": "90vh",
+                        "source": "${internalImageUrl}"
+                    }
+                ]
+            }
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "width": "100vw",
+                "height": "100vh",
+                "items": [
+                    {
+                        "type": "Pager",
+                        "id": "mainPager",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "onPageChanged": [
+                            {
+                                "type": "SpeakItem",
+                                "componentId": "pageText_${event.source.value}"
+                            }
+                        ],
+                        "data": "${payload.data.properties.values}",
+                        "items": [
+                            {
+                                "type": "myPage",
+                                "internalIndex": "${index}",
+                                "internalCaption": "${data.caption}",
+                                "internalImageUrl": "${data.image}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
