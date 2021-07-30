@@ -1,0 +1,30 @@
+{
+    "data": {
+        "properties": {
+            "values": [
+                {
+                    "id": "Page 1",
+                    "caption": "Caption 1",
+                    "image": "https://public-us-east-1.s3.amazonaws.com/amazon-logo.png"
+                },
+                {
+                    "id": "Page 2",
+                    "caption": "Caption 2",
+                    "image": "https://public-us-east-1.s3.amazonaws.com/amazon-logo.png"
+                },
+                {
+                    "id": "Page 3",
+                    "caption": "Caption 3",
+                    "image": "https://public-us-east-1.s3.amazonaws.com/amazon-logo.png"
+                }
+            ]
+        },
+        "transformers": [
+            {
+                "inputPath": "values[*].caption",
+                "outputName": "transformerOutput",
+                "transformer": "textToSpeech"
+            }
+        ]
+    }
+}
